@@ -8,11 +8,16 @@ ul{
 li{
   margin-top: 10px;
 }
+#menu-name{
+  font-size: 18px;
+  font-weight: bold;
+}
 #removeBtn{
   background-color: #f46242;
   border: #f46242;
 }
 .error{
+  font-weight: bold;
   color: red;
   display: none;
 }

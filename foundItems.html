@@ -1,14 +1,20 @@
 <ul>
-  <li div class='row' ng-repeat="item in menu.found">
-    <div class="col-md-12">
-      {{item.short_name}} - {{item.name}} 
+  <li class='row' ng-repeat="item in menu.found">
+
+    <div class='row'>
+      <div id="menu-name" class="col-md-6">
+        {{item.short_name}} - {{item.name}} 
+      </div>
     </div>
-    <div class="col-md-6">
-      {{item.description}}
+    <div class='row'>
+      <div class="col-md-6">
+        {{item.description}}
+     </div>
+      <div class="col-md-6">
+        <button id='removeBtn' class="btn btn-primary" ng-click="menu.onRemove({index: $index});">Don't want this one!</button>
+      </div>
     </div>
-    <div class="col-md-6">
-      <button id='removeBtn' class="btn btn-primary" ng-click="menu.onRemove({index: $index});">Dont want this one!</button>
-    </div>
+
   </li>
 </ul>
 

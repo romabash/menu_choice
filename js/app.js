@@ -6,7 +6,7 @@
   .controller('NarrowItDownController', NarrowItDownController)
   .service('MenuSearchService', MenuSearchService)  
   .directive('foundItems', FoundItems)
-  .constant('ApiBasePath', "http://davids-restaurant.herokuapp.com"); 
+  .constant('ApiBasePath', "https://davids-restaurant.herokuapp.com"); 
   
 //Directive
   function FoundItems(){
@@ -54,13 +54,13 @@
 		
 	  //Using full JQuery
 	  var warningElem = element.find('div.error');
-	  warningElem.slideDown(900);
+	  warningElem.css('display', 'block');
 	}
 	function removeMessage(){
 		
 	  //Using full JQuery
 	  var warningElem = element.find('div.error');
-	  warningElem.slideUp(900);
+	  warningElem.css('display', 'none');
 	}
   }
   
@@ -69,13 +69,13 @@
   function NarrowItDownController(MenuSearchService){
 	
 	var menu = this;
-	menu.warning = "NOTHING FOUND!";
+	menu.warning = "";
 	menu.found = [];
 	menu.entry = "";
 	
 	menu.searchFoundList = function(searchItem){
 	  if(menu.entry === ""){
-		return;
+		menu.warning = "NOTHING FOUND!";
 	  }
 	  else{
 	    menu.found = MenuSearchService.getMatchedMenuItems(searchItem);
