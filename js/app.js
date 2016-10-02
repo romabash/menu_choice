@@ -11,14 +11,8 @@
 //Directive
   function FoundItems(){
 	var ddo = {
-		//templateUrl: 'foundItems.html',
-		template: '<ul>\
-	                 <li ng-repeat="item in menu.found">\
-		               {{item.name}}  {{item.id}}\
-		               <button ng-click="menu.onRemove({index: $index});">Dont want this one!</button>\
-		             </li>\
-	               </ul>\
-				   <div class="error" ng-if="menu.checkInput()">Nothing found</div>',
+		templateUrl: 'foundItems.html',
+		//template: '<ul><li ng-repeat="item in menu.found">{{item.name}}  {{item.id}}<button ng-click="menu.onRemove({index: $index});">Dont want this one!</button></li></ul><div class="error" ng-transclude></div>',
 	    scope: {
 		  //one directional bind of the var found in NarrowItDownController by declaring found = menu.found in HTML
 		  found: '<', 
@@ -27,7 +21,8 @@
 		controller: FoundItemsDirectiveController,
 		controllerAs: 'menu',
 		bindToController: true,
-		link: ShoppingListDirectiveLink
+		link: ShoppingListDirectiveLink,
+		transclude: true
 	  };
 	  return ddo;  
   }
@@ -37,7 +32,7 @@
 	var menu = this;
 	  
 	menu.checkInput = function(){
-	  if(menu.found.length === 0 || menu.entry === ""){
+	  if(menu.found.length === 0){
 		return true;
 	  }
 	  return false;
@@ -46,7 +41,7 @@
   
 //Directive Link for jQuery	- looks for change in function "checkInput" inside scope.$watch
   function ShoppingListDirectiveLink(scope, element, attrs, controller){
-	scope.$watch('menu.checkInput()', function(newValue, oldValew){
+	scope.$watch('menu.checkInput()', function(newValue, oldValue){
 	  if(newValue === true){
 		displayMessage();
 	  }
@@ -56,18 +51,12 @@
 	});
 	  
 	function displayMessage(){
-	  //Using Anglar JqLite
-      //var warningElem = element.find('div');
-	  //warningElem.css('display', 'block');
 		
 	  //Using full JQuery
 	  var warningElem = element.find('div.error');
 	  warningElem.slideDown(900);
 	}
 	function removeMessage(){
-	  //Using Anglar JqLite
-	  //var warningElem = element.find('div');
-	  //warningElem.css('display', 'none');
 		
 	  //Using full JQuery
 	  var warningElem = element.find('div.error');
@@ -80,6 +69,7 @@
   function NarrowItDownController(MenuSearchService){
 	
 	var menu = this;
+	menu.warning = "NOTHING FOUND!";
 	menu.found = [];
 	menu.entry = "";
 	

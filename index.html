@@ -14,16 +14,28 @@
   <div class="container" ng-controller="NarrowItDownController as menu">
     <h1>Narrow Down Your Menu Choice</h1>
 
-    <div class="form-group">
-      <input type="text" placeholder="search term" class="form-control" ng-model="menu.entry" >
+  <div class='row'>
+    <div class="col-md-6">
+      <div class="form-group">
+        <input type="text" placeholder="search term" class="form-control" ng-model="menu.entry" >
+      </div>
     </div>
-    <div class="form-group narrow-button">
-      <button class="btn btn-primary" ng-click="menu.searchFoundList(menu.entry)">Narrow It Down For Me!</button>
+
+    <div class="col-md-6">
+      <div class="form-group narrow-button">
+        <button class="btn btn-primary" ng-click="menu.searchFoundList(menu.entry)">Narrow It Down For Me!</button>
+      </div>
     </div>
+  </div>
 
     <found-items 
       found='menu.found' 
       on-remove='menu.removeItem(index)'>
+
+      <div>
+          <div>{{menu.warning}}</div>
+      </div>
+
     </found-items>
   </div>
 
