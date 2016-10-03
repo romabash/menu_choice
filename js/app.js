@@ -69,13 +69,13 @@
   function NarrowItDownController(MenuSearchService){
 	
 	var menu = this;
-	menu.warning = "";
+	menu.warning = "NOTHING FOUND!";
 	menu.found = [];
 	menu.entry = "";
 	
 	menu.searchFoundList = function(searchItem){
 	  if(menu.entry === ""){
-		menu.warning = "NOTHING FOUND!";
+		return;
 	  }
 	  else{
 	    menu.found = MenuSearchService.getMatchedMenuItems(searchItem);
